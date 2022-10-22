@@ -55,6 +55,7 @@ select * from t1 join t2 on t1.c1 = t2.c1;
 ```
 mysql -h 172.16.4.99 -P 9025 -u root -Dtpch_100_multi_key --prompt="tidb> "
 
+set tidb_isolation_read_engines = 'tiflash';
 set tidb_mpp_enable_redistributed_index=OFF;
 ```
 
@@ -62,6 +63,7 @@ set tidb_mpp_enable_redistributed_index=OFF;
 ```
 mysql -h 172.16.4.99 -P 9025 -u root -Dtpch_100_multi_key --prompt="tidb(opt.)> "
 
+set tidb_isolation_read_engines = 'tiflash';
 set tidb_mpp_enable_redistributed_index=ON;
 ```
 
@@ -110,4 +112,5 @@ order by
 ### Hand-made Query
 
 ```
+select count(*), l_orderkey from lineitem group by l_orderkey limit 10;
 ```

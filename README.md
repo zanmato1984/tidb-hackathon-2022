@@ -28,13 +28,13 @@ alter table t2 set tiflash replica 1;
 
 ```
 set tidb_mpp_enable_redistributed_index=OFF;
-explain select count(*) from t1 group by c1;
+explain select c1, count(*) from t1 group by c1;
 
 insert into t1 values (1, 101, 'hello'), (2, 102, 'world');
 
 set tidb_mpp_enable_redistributed_index=ON;
-explain select count(*) from t1 group by c1;
-select count(*) from t1 group by c1;
+explain select c1, count(*) from t1 group by c1;
+select c1, count(*) from t1 group by c1;
 
 set tidb_mpp_enable_redistributed_index=OFF;
 explain select * from t1 join t2 on t1.c1 = t2.c1;
@@ -112,5 +112,5 @@ order by
 ### Hand-made Query
 
 ```
-select count(*), l_orderkey from lineitem group by l_orderkey limit 10;
+select l_orderkey, count(*) from lineitem group by l_orderkey limit 10;
 ```

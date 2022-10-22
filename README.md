@@ -6,11 +6,7 @@
 
 ```
 mysql -h 172.16.4.99 -P 9025 -u root -Dtest --prompt="tidb> "
-```
 
-### Setting
-
-```
 set tidb_broadcast_join_threshold_count=0;
 set tidb_broadcast_join_threshold_size=0;
 ```
@@ -55,14 +51,17 @@ select * from t1 join t2 on t1.c1 = t2.c1;
 ### Connection
 
 * Original
+
 ```
 mysql -h 172.16.4.99 -P 9025 -u root -Dtpch_100_multi_key --prompt="tidb> "
+
 set tidb_mpp_enable_redistributed_index=OFF;
 ```
 
 * Optimized
 ```
 mysql -h 172.16.4.99 -P 9025 -u root -Dtpch_100_multi_key --prompt="tidb(opt.)> "
+
 set tidb_mpp_enable_redistributed_index=ON;
 ```
 

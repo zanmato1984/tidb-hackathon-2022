@@ -17,8 +17,8 @@ set tidb_broadcast_join_threshold_size=0;
 drop table t1;
 drop table t2;
 
-create table t1(id int primary key, c1 int, c2 char(255)) redistributed by (c1) to group g1;
-create table t2(id int primary key, c1 int, c2 char(255)) redistributed by (c1) to group g1;
+create table t1(id int primary key, c1 int, c2 char(255), redistributed key (c1) to group g1);
+create table t2(id int primary key, c1 int, c2 char(255), redistributed key (c1) to group g1);
 
 alter table t1 set tiflash replica 1;
 alter table t2 set tiflash replica 1;

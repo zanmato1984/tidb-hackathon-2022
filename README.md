@@ -15,7 +15,7 @@ set tidb_broadcast_join_threshold_count=0;
 set tidb_broadcast_join_threshold_size=0;
 ```
 
-### Statements
+### Create Table
 
 ```
 drop table t1;
@@ -26,7 +26,11 @@ create table t2(id int primary key, c1 int, c2 char(255)) redistributed by (c1) 
 
 alter table t1 set tiflash replica 1;
 alter table t2 set tiflash replica 1;
+```
 
+### Data & Plan
+
+```
 set tidb_mpp_enable_redistributed_index=OFF;
 explain select count(*) from t1 group by c1;
 
@@ -46,7 +50,16 @@ explain select * from t1 join t2 on t1.c1 = t2.c1;
 select * from t1 join t2 on t1.c1 = t2.c1;
 ```
 
-## Redistributed Index
+## Performance
+
+### Setting
+
+```
+set tidb_mpp_enable_redistributed_index=OFF;
+set tidb_mpp_enable_redistributed_index=ON;
+```
+
+### TPCH Q8
 
 ```
 select
@@ -86,4 +99,9 @@ group by
 	o_year
 order by
 	o_year;
+```
+
+### Hand-made Query
+
+```
 ```
